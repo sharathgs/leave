@@ -7,6 +7,8 @@ import java.util.Optional;
 
 import javax.security.auth.login.LoginException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -20,13 +22,16 @@ import com.leavemanagement.util.Status;
 
 @Service
 public class LoginServiceImpl implements LoginService {
+	
+	private static final Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
 
 	@Autowired
 	LoginRepository loginRepository;
 
 	@Override
 	public LoginResponseDto userLogin(LoginRequestDto loginRequestDto) throws LoginException {
-
+	
+		logger.info("in userlogin service");
 		String userEmail = loginRequestDto.getEmail();
 		if (userEmail.length() <= 8)
 			throw new LoginException(LeaveUtil.INVALID_DOMAIN);

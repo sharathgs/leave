@@ -19,6 +19,8 @@ import com.leavemanagement.service.LoginService;
 @RequestMapping("/api")
 
 public class LoginController {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(LeaveHistoryController.class);
 	@Autowired
 	LoginService loginService;
 	

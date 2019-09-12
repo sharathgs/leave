@@ -12,6 +12,6 @@ import com.leavemanagement.model.MyLeaves;
 @Repository
 public interface LeaveHistoryRepository extends JpaRepository<MyLeaves, Integer> {
 
-	@Query(value = "select * from my_leaves where employee_id= :employeeId and from_date>= :fromDate && to_date<= :toDate", nativeQuery = true)
-	List<MyLeaves> findByBetweenDate(int employeeId, LocalDate fromDate, LocalDate toDate);
+	@Query(value = "select * from my_leaves where employee_id= :employeeId and for_date between :fromDate and :toDate", nativeQuery = true)
+	List<MyLeaves> findByBetweenDate(int employeeId, LocalDate fromDate, String toDate);
 }

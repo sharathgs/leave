@@ -14,10 +14,8 @@ public class LeaveHistoryResponseDTO {
 	private int myLeavesId;
 	private int employeeId;
 	private String status;
-	private int noOfDays;
 	private String leaveType;
 	private LocalDate appliedDate;
-	private LocalDate fromDate;
-	private LocalDate toDate;
-
+	private LocalDate forDate;
+	private String remark;
 }

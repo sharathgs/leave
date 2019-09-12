@@ -47,12 +47,12 @@ public class LeaveHistoryControllerTest {
 		LeaveHistoryResponseDTO myLeaves = new LeaveHistoryResponseDTO();
 		myLeaves.setAppliedDate(LocalDate.now());
 		myLeaves.setEmployeeId(1);
-		myLeaves.setFromDate(LocalDate.now());
 		myLeaves.setLeaveType("CH");
-		myLeaves.setNoOfDays(2);
+		myLeaves.setForDate(LocalDate.now());
 		myLeaves.setMyLeavesId(1);
+		myLeaves.setRemark("BDAY");
 		myLeaves.setStatus("Approved");
-		myLeaves.setToDate(LocalDate.now());
+	
 		historyResponseDTOs.add(myLeaves);
 		return historyResponseDTOs;
 	}

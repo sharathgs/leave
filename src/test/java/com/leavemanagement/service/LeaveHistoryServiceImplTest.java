@@ -30,13 +30,13 @@ public class LeaveHistoryServiceImplTest {
 		MyLeaves myLeaves2 = new MyLeaves();
 
 		myLeaves2.setAppliedDate(LocalDate.now());
+		
 		myLeaves2.setEmployeeId(1);
-		myLeaves2.setFromDate(LocalDate.now());
 		myLeaves2.setLeaveType("CH");
-		myLeaves2.setNoOfDays(2);
+		myLeaves2.setForDate(LocalDate.now());
 		myLeaves2.setMyLeavesId(1);
+		myLeaves2.setRemark("BDAY");
 		myLeaves2.setStatus("Approved");
-		myLeaves2.setToDate(LocalDate.now());
 		leaves.add(myLeaves2);
 		return leaves;
 	}
@@ -47,12 +47,11 @@ public class LeaveHistoryServiceImplTest {
 		LeaveHistoryResponseDTO myLeaves = new LeaveHistoryResponseDTO();
 		myLeaves.setAppliedDate(LocalDate.now());
 		myLeaves.setEmployeeId(1);
-		myLeaves.setFromDate(LocalDate.now());
 		myLeaves.setLeaveType("CH");
-		myLeaves.setNoOfDays(2);
+		myLeaves.setForDate(LocalDate.now());
 		myLeaves.setMyLeavesId(1);
+		myLeaves.setRemark("BDAY");
 		myLeaves.setStatus("Approved");
-		myLeaves.setToDate(LocalDate.now());
 		historyResponseDTOs.add(myLeaves);
 		return historyResponseDTOs;
 

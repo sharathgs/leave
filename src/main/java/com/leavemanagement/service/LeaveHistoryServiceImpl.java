@@ -34,8 +34,9 @@ public class LeaveHistoryServiceImpl implements LeaveHistoryService {
 			LocalDate currentMonth = LocalDate.now().minusMonths(1);
 			myLeaves = leaveHistoryRepository.findByBetweenDate(employeeId, currentMonth, currentdate);
 		} else if (fromDate != null && toDate != null) {
-			myLeaves = leaveHistoryRepository.findByBetweenDate(employeeId, LocalDate.parse(fromDate, formatter),
-					LocalDate.parse(toDate, formatter));
+			LocalDate fromLocalDate = LocalDate.parse(fromDate, formatter);
+			LocalDate toLocalDate = LocalDate.parse(toDate, formatter);
+			myLeaves = leaveHistoryRepository.findByBetweenDate(employeeId, fromLocalDate, toDate);
 		}
 
 		if (!myLeaves.isEmpty()) {

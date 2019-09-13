@@ -36,7 +36,7 @@ public class LeaveHistoryServiceImpl implements LeaveHistoryService {
 		} else if (fromDate != null && toDate != null) {
 			LocalDate fromLocalDate = LocalDate.parse(fromDate, formatter);
 			LocalDate toLocalDate = LocalDate.parse(toDate, formatter);
-			myLeaves = leaveHistoryRepository.findByBetweenDate(employeeId, fromLocalDate, toDate);
+			myLeaves = leaveHistoryRepository.findByBetweenDate(employeeId, fromLocalDate, toLocalDate);
 		}
 
 		if (!myLeaves.isEmpty()) {

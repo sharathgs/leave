@@ -28,7 +28,7 @@ public class LoginController {
 	
 	@PostMapping("/login")
 	public ResponseEntity<LoginResponseDto> userLogin(@RequestBody LoginRequestDto loginRequestDto) throws LoginException{
-		logger.info("in login controller");
+		lOGGER.info("in login controller");
 		return new ResponseEntity<>(loginService.userLogin(loginRequestDto),HttpStatus.OK);
 	}
 }

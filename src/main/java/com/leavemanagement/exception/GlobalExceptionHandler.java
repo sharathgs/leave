@@ -31,5 +31,30 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		errorResponse.setTimestamp(LocalDate.now());
 		return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
 	}
+	@ExceptionHandler(InsufficientLeaveException.class)
+	public ResponseEntity<ErrorResponse> insufficientLeaveExceptionHandler(InsufficientLeaveException exception,WebRequest request) {
+		ErrorResponse errorResponse = new ErrorResponse(LocalDate.now(),
+				  exception.getMessage(), request.getDescription(false));
+		  
+		  return new ResponseEntity<ErrorResponse>(errorResponse,HttpStatus.NOT_FOUND);
+		  
+		  }
+	@ExceptionHandler(EmployeeDoesNotExistException.class)
+	public ResponseEntity<ErrorResponse> employeeDoesNotExistExceptionHandler(EmployeeDoesNotExistException exception,WebRequest request) {
+		ErrorResponse errorResponse = new ErrorResponse(LocalDate.now(),
+				  exception.getMessage(), request.getDescription(false));
+		  
+		  return new ResponseEntity<ErrorResponse>(errorResponse,HttpStatus.NOT_FOUND);
+		  
+		  }
+	
+	@ExceptionHandler(InvalidDateException.class)
+	public ResponseEntity<ErrorResponse> invalidDateExceptionHandler(InvalidDateException exception,WebRequest request) {
+		ErrorResponse errorResponse = new ErrorResponse(LocalDate.now(),
+				  exception.getMessage(), request.getDescription(false));
+		  
+		  return new ResponseEntity<ErrorResponse>(errorResponse,HttpStatus.NOT_FOUND);
+		  
+		  }
 	
 }

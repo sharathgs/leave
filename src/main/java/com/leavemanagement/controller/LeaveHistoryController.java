@@ -29,23 +29,23 @@ public class LeaveHistoryController {
 	private LeaveHistoryService leaveHistoryService;
 
 	/**
-	 * 
-	 * This method is use to get all the leave History
-	 * @PathVariable customerId,not null
-	 * @return ResponseEntity<List<FavoriteResponseDTO>>
-	 * 
+	 * This method is use to get leave history based on date or month
+	 * @param employeeId,not null
+	 * @param months,not null
+	 * @param fromDate,optional
+	 * @param toDate,optional
+	 * @return ResponseEntity<List<LeaveHistoryResponseDTO>> ,not null
 	 */
 
-	@GetMapping("/leave/{employeeId}")
-	public ResponseEntity<List<LeaveHistoryResponseDTO>> getAllLeaveHistory(@PathVariable int employeeId, 
-			@RequestParam(required = false) Integer months,
-			@RequestParam(required = false)  String fromDate,
+	@GetMapping("/leaves/history/{employeeId}")
+	public ResponseEntity<List<LeaveHistoryResponseDTO>> getAllLeaveHistory(@PathVariable int employeeId,
+			@RequestParam(required = false) int months, @RequestParam(required = false) String fromDate,
 			@RequestParam(required = false) String toDate) {
 
-		
 		LOGGER.info("inside getAllLeaveHistory method of LeaveHistoryController class");
 
-		List<LeaveHistoryResponseDTO> list = leaveHistoryService.getAllLeaveHistory(employeeId,months,fromDate,toDate);
+		List<LeaveHistoryResponseDTO> list = leaveHistoryService.getAllLeaveHistory(employeeId, months, fromDate,
+				toDate);
 
 		return new ResponseEntity<>(list, HttpStatus.OK);
 

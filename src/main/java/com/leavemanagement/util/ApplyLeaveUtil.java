@@ -15,10 +15,12 @@ import org.springframework.stereotype.Component;
 public class ApplyLeaveUtil {
 
 	public static final String EMPLOYEE_DOES_NOT_EXIST_EXCEPTION = "Invalid employee";
+	
+	public static final String ALREADY_APPLY_LEAVE_EEXCEPTION = "Already applied leave.";
 
 	public static final String INSUFFICIENT_LEAVE_EXCEPTION = "Insufficient leave";
 	
-	public static final String INVALID_DATE_EEXCEPTION = "Invalid leave date";
+	public static final String INVALID_DATE_EEXCEPTION = "You can not apply for past date";
 	
 	public static final String RESTRICTED_HOLIDAY = "RH";
 

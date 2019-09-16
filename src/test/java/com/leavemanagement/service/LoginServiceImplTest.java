@@ -15,7 +15,7 @@ import org.springframework.http.HttpStatus;
 
 import com.leavemanagement.dto.LoginRequestDto;
 import com.leavemanagement.dto.LoginResponseDto;
-import com.leavemanagement.exception.LoginException;
+import com.leavemanagement.exception.InvalidLoginException;
 import com.leavemanagement.model.Employee;
 import com.leavemanagement.repository.LoginRepository;
 
@@ -64,11 +64,31 @@ public class LoginServiceImplTest {
 		
 	}
 	
-	@Test(expected=LoginException.class)
-	public void testUserLoginNotFound() throws Exception {
+	@Test(expected=InvalidLoginException.class)
+	public void testUserLoginNotFound()  {
 		
 		Mockito.when(loginRepository.findByEmail(loginRequestDto.getEmail())).thenReturn(Optional.empty());
 		LoginResponseDto loginResponseDto2 = loginServiceImpl.userLogin(loginRequestDto);
 		assertEquals(loginResponseDto1.getStatusCode(),loginResponseDto2.getStatusCode());
+	}
+	
+	@Test
+	public void testNagetiveUserLogin() {
+		loginRequestDto = new LoginRequestDto();
+		loginRequestDto.setEmail("mahi@hcl.com");
+		loginRequestDto.setPassword("gowham");
+		
+		emp = new Employee();
+		emp.setEmail("mahi@hcl.com");
+		emp.setPassword("gowtham");
+		emp.setEmployeeId(1);
+		emp.setLocation("Bangalore");
+		emp.setName("Mahesh");
+		emp.setPhone("99999");
+		LoginResponseDto loginResponseDto2 = new  LoginResponseDto();
+		loginResponseDto2.setStatusCode(HttpStatus.NOT_FOUND.value());
+		Mockito.when(loginRepository.findByEmail(loginRequestDto.getEmail())).thenReturn(Optional.of(emp));
+		LoginResponseDto loginResponseDto3 = loginServiceImpl.userLogin(loginRequestDto);
+		assertEquals(loginResponseDto2.getStatusCode(), loginResponseDto3.getStatusCode());
 	}
 }

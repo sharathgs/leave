@@ -5,14 +5,12 @@ import lombok.Setter;
 
 @Setter
 @Getter
-
-
-public class LoginException extends RuntimeException{
+public class InvalidLoginException extends RuntimeException{
 	
 
 	private static final long serialVersionUID = 1L;
 	private final String message;
-	public LoginException(String message) {
+	public InvalidLoginException(String message) {
 		this.message = message;
 	}
 	

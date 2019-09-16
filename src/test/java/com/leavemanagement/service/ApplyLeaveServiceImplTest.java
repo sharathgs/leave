@@ -17,6 +17,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import com.leavemanagement.dto.ApplyLeaveRequestDto;
 import com.leavemanagement.dto.ApplyLeaveResponseDto;
+import com.leavemanagement.dto.LoginResponseDto;
+import com.leavemanagement.exception.AlreadyApplyLeaveException;
 import com.leavemanagement.model.Leaves;
 import com.leavemanagement.model.MyLeaves;
 import com.leavemanagement.repository.LeaveHistoryRepository;
@@ -78,6 +80,29 @@ public class ApplyLeaveServiceImplTest {
 		Mockito.when(leaveHistoryRepository.saveAll(Mockito.anyList())).thenReturn(myLeavesList);
 		
 		ApplyLeaveResponseDto acctualResult = applyLeaveServiceImpl.applyLeave(applyLeaveRequestDto);
-		assertEquals(ApplyLeaveUtil.STATUS_SUCCCESS, acctualResult.getStatus());
+		assertEquals("success", acctualResult.getMessage());
 	}
+	
+	
+	  @Test(expected=AlreadyApplyLeaveException.class) public void
+	  alreadyApplyLeaveExceptionTest() {
+	  LoginResponseDto loginResponseDto1=new LoginResponseDto();
+	  loginResponseDto1.setMessage("Ajith");
+	  
+	  applyLeaveRequestDto = new ApplyLeaveRequestDto();
+
+		applyLeaveRequestDto.setEmployeeId(1);
+		applyLeaveRequestDto.setFromDate("2019-09-12");
+		applyLeaveRequestDto.setLeaveType("ch");
+		applyLeaveRequestDto.setToDate("2019-09-14");
+		applyLeaveRequestDto.setRemark("birthday leave");
+	  
+	  Mockito.when(leaveHistoryRepository.findByForDate(Mockito.any())).thenReturn(
+	  Optional.empty()); 
+	  ApplyLeaveResponseDto response = applyLeaveServiceImpl.applyLeave(applyLeaveRequestDto);
+	  assertEquals(loginResponseDto1.getStatusCode(),response.getStatusCode()); }
+	 
+	
+	
+	
 }

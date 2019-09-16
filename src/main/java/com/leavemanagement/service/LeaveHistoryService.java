@@ -6,6 +6,6 @@ import com.leavemanagement.dto.LeaveHistoryResponseDTO;
 
 public interface LeaveHistoryService {
 
-	List<LeaveHistoryResponseDTO> getAllLeaveHistory(int employeeId, Integer months, String fromDate, String toDate);
+	List<LeaveHistoryResponseDTO> getAllLeaveHistory(int employeeId, int months, String fromDate, String toDate);
 
 }

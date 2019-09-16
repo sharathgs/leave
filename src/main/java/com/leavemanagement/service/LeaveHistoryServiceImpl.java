@@ -19,25 +19,22 @@ public class LeaveHistoryServiceImpl implements LeaveHistoryService {
 	@Autowired
 	LeaveHistoryRepository leaveHistoryRepository;
 
-	public List<LeaveHistoryResponseDTO> getAllLeaveHistory(int employeeId, Integer months, String fromDate,
+	public List<LeaveHistoryResponseDTO> getAllLeaveHistory(int employeeId, int months, String fromDate,
 			String toDate) {
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		LocalDate currentdate = LocalDate.now();
+		LocalDate fromLocalDate = null;
+		LocalDate toLocalDate = null;
 		List<LeaveHistoryResponseDTO> leaveHistoryResponse = new ArrayList<>();
-		List<MyLeaves> myLeaves = new ArrayList<>();
-
-		if (months == 3) {
-			LocalDate threeMonth = LocalDate.now().minusMonths(3);
-			myLeaves = leaveHistoryRepository.findByBetweenDate(employeeId, threeMonth, currentdate);
-		} else if (months == 1) {
-			LocalDate currentMonth = LocalDate.now().minusMonths(1);
-			myLeaves = leaveHistoryRepository.findByBetweenDate(employeeId, currentMonth, currentdate);
-		} else if (fromDate != null && toDate != null) {
-			LocalDate fromLocalDate = LocalDate.parse(fromDate, formatter);
-			LocalDate toLocalDate = LocalDate.parse(toDate, formatter);
-			myLeaves = leaveHistoryRepository.findByBetweenDate(employeeId, fromLocalDate, toLocalDate);
+		List<MyLeaves> myLeaves = null;
+		if (fromDate != null && toDate != null) {
+			fromLocalDate = LocalDate.parse(fromDate, formatter);
+			toLocalDate = LocalDate.parse(toDate, formatter);
+		} else {
+			fromLocalDate = LocalDate.now().minusMonths(months);
+			toLocalDate = LocalDate.now();
 		}
+		myLeaves = leaveHistoryRepository.findByBetweenDate(employeeId, fromLocalDate, toLocalDate);
 
 		if (!myLeaves.isEmpty()) {
 			myLeaves.stream().forEach(myleave -> {

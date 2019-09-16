@@ -12,49 +12,63 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-	@ExceptionHandler(Exception.class)
-	public ResponseEntity<ErrorResponse> globalExceptionHandler(Exception exception,WebRequest request) {
-		  ErrorResponse errorResponse = new ErrorResponse(LocalDate.now(),
-		  exception.getMessage(), request.getDescription(false));
-		  
-		  return new ResponseEntity<>(errorResponse,HttpStatus.NOT_FOUND);
-		  
-		  }
 	
-	
+	  @ExceptionHandler(InvalidLoginException.class) public
+	  ResponseEntity<ErrorResponse> globalExceptionHandler(InvalidLoginException
+	  exception,WebRequest request) { ErrorResponse errorResponse = new
+	  ErrorResponse(LocalDate.now(), exception.getMessage(), HttpStatus.NOT_FOUND.value());
+	  
+	  return new ResponseEntity<>(errorResponse,HttpStatus.NOT_FOUND);
+	  
+	  }
+	 
+
 	@ExceptionHandler(LeaveException.class)
-	public ResponseEntity<ErrorResponse> globalExceptionHandler(LeaveException exception,
-			WebRequest request) {
+	public ResponseEntity<ErrorResponse> globalExceptionHandler(LeaveException exception, WebRequest request) {
 		ErrorResponse errorResponse = new ErrorResponse();
 		errorResponse.setMessage(exception.getMessage());
 		errorResponse.setStatusCode(HttpStatus.NOT_FOUND.value());
 		errorResponse.setTimestamp(LocalDate.now());
 		return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
 	}
+
 	@ExceptionHandler(InsufficientLeaveException.class)
-	public ResponseEntity<ErrorResponse> insufficientLeaveExceptionHandler(InsufficientLeaveException exception,WebRequest request) {
-		ErrorResponse errorResponse = new ErrorResponse(LocalDate.now(),
-				  exception.getMessage(), request.getDescription(false));
-		  
-		  return new ResponseEntity<ErrorResponse>(errorResponse,HttpStatus.NOT_FOUND);
-		  
-		  }
+	public ResponseEntity<ErrorResponse> insufficientLeaveExceptionHandler(InsufficientLeaveException exception,
+			WebRequest request) {
+		ErrorResponse errorResponse = new ErrorResponse(LocalDate.now(), exception.getMessage(),
+				HttpStatus.NOT_FOUND.value());
+
+		return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+
+	}
+
 	@ExceptionHandler(EmployeeDoesNotExistException.class)
-	public ResponseEntity<ErrorResponse> employeeDoesNotExistExceptionHandler(EmployeeDoesNotExistException exception,WebRequest request) {
-		ErrorResponse errorResponse = new ErrorResponse(LocalDate.now(),
-				  exception.getMessage(), request.getDescription(false));
-		  
-		  return new ResponseEntity<ErrorResponse>(errorResponse,HttpStatus.NOT_FOUND);
-		  
-		  }
-	
+	public ResponseEntity<ErrorResponse> employeeDoesNotExistExceptionHandler(EmployeeDoesNotExistException exception,
+			WebRequest request) {
+		ErrorResponse errorResponse = new ErrorResponse(LocalDate.now(), exception.getMessage(),
+				HttpStatus.NOT_FOUND.value());
+
+		return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+
+	}
+
 	@ExceptionHandler(InvalidDateException.class)
-	public ResponseEntity<ErrorResponse> invalidDateExceptionHandler(InvalidDateException exception,WebRequest request) {
-		ErrorResponse errorResponse = new ErrorResponse(LocalDate.now(),
-				  exception.getMessage(), request.getDescription(false));
-		  
-		  return new ResponseEntity<ErrorResponse>(errorResponse,HttpStatus.NOT_FOUND);
-		  
-		  }
-	
+	public ResponseEntity<ErrorResponse> invalidDateExceptionHandler(InvalidDateException exception,
+			WebRequest request) {
+		ErrorResponse errorResponse = new ErrorResponse(LocalDate.now(), exception.getMessage(),
+				HttpStatus.NOT_FOUND.value());
+
+		return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+
+	}
+	@ExceptionHandler(AlreadyApplyLeaveException.class)
+	public ResponseEntity<ErrorResponse> alreadyApplyLeaveExceptionHandler(AlreadyApplyLeaveException exception,
+			WebRequest request) {
+		ErrorResponse errorResponse = new ErrorResponse(LocalDate.now(), exception.getMessage(),
+				HttpStatus.NOT_FOUND.value());
+
+		return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+
+	}
+
 }
